@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Divs Across the Screen</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        .movable {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div class="movable" id="div1"></div>
+<div class="movable" id="div2" style="background-color: blue;"></div>
+
+<script>
+    function moveDiv(divId) {
+        let div = document.getElementById(divId);
+        let position = 0;
+        let direction = 1; // 1 for right, -1 for left
+
+        setInterval(() => {
+            if (position >= window.innerWidth - 50 || position <= 0) {
+                direction *= -1; // Change direction
+            }
+            position += 5 * direction; // Move 5 pixels
+            div.style.left = position + 'px';
+        }, 100);
+    }
+
+    moveDiv('div1');
+    moveDiv('div2');
+</script>
+
+</body>
+</html>
