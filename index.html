@@ -3,42 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Move Divs Across the Screen</title>
+    <title>Yellow Panel</title>
     <style>
         body {
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        .movable {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: absolute;
+        .panel {
+            width: 6in;
+            height: 8in;
+            background-color: yellow;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .panel {
+                width: 90%;
+                height: auto;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="movable" id="div1">div1</div>
-<div class="movable" id="div2" style="background-color: blue;">div2</div>
-
-<script>
-    function moveDiv(divId) {
-        let div = document.getElementById(divId);
-        let position = 0;
-        let direction = 1; // 1 for right, -1 for left
-
-        setInterval(() => {
-            if (position >= window.innerWidth - 50 || position <= 0) {
-                direction *= -1; // Change direction
-            }
-            position += 10 * direction; // Move 5 pixels
-            div.style.left = position + 'px';
-        }, 100); //move every 100ms
-    }
-
-    moveDiv('div1');
-    moveDiv('div2');
-</script>
-
+    <div class="panel">This is a yellow panel</div>
 </body>
 </html>
