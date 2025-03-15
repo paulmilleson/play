@@ -3,36 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yellow Panel</title>
+    <title>Yellow Panel with Movable Box</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .div {
-            width: 600px;
-            height: 800px;
-            background-color: yellow;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        @media (max-width: 768px) {
-            .div {
-                width: 90%;
-                height: auto;
-            }
+        .movable {
+            width: 40px; /* Height previously */
+            height: 20px; /* Width previously */
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="panel">This is a yellow panel</div>
+    <div id="parent" style="position: relative; width: 800px; height: 200px; background-color: yellow; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div class="movable" style="top: 0; left: 0;"></div>
+    </div>
+
+    <script>
+        const movableBox = document.querySelector('.movable');
+        const parentDiv = document.getElementById('parent');
+        let posX = 0;
+        let posY = 0;
+        const moveStep = 10;
+        let direction = 1; // 1 for right, -1 for left
+        let movingDown = true; // Track if moving down
+
+        function moveBox() {
+            if (movingDown) {
+                posX += moveStep * direction;
+
+                // Right edge check
+                if (posX + 40 > parentDiv.clientWidth) {
+                    posX = parentDiv.clientWidth - 40; // Adjust to fit
+                    posY += moveStep; // Move down a row
+                    direction = -1; // Change direction to left
+                } 
+                // Left edge check
+                else if (posX < 0) {
+                    posX = 0; // Adjust to fit
+                    posY += moveStep; // Move down a row
+                    direction = 1; // Change direction to right
+                }
+                
+                // Check if at the bottom right corner
+                if (posY + 20 >= parentDiv.clientHeight) {
+                    posY = parentDiv.clientHeight - 20; // Adjust to fit
+                    movingDown = false; // Change to moving up
+                }
+            } else {
+                posX += moveStep * direction;
+
+                // Right edge check
+                if (posX + 40 > parentDiv.clientWidth) {
+                    posX = parentDiv.clientWidth - 40; // Adjust to fit
+                    posY -= moveStep; // Move up a row
+                    direction = -1; // Change direction to left
+                } 
+                // Left edge check
+                else if (posX < 0) {
+                    posX = 0; // Adjust to fit
+                    posY -= moveStep; // Move up a row
+                    direction = 1; // Change direction to right
+                }
+                
+                // Check if at the top
+                if (posY <= 0) {
+                    posY = 0; // Reset to top
+                    movingDown = true; // Change to moving down
+                }
+            }
+
+            movableBox.style.left = posX + 'px';
+            movableBox.style.top = posY + 'px';
+        }
+
+        setInterval(moveBox, 1); // Move every 1 millisecond
+    </script>
 </body>
 </html>
