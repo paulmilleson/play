@@ -5,139 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yellow Panel with Movable Boxes</title>
     <style>
+        .container {
+            position: relative;
+            width: 800px;
+            height: 200px;
+            background-color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Prevent overflow */
+        }
         .movable {
-            width: 40px; /* Height previously */
-            height: 20px; /* Width previously */
+            width: 40px;
+            height: 20px;
             position: absolute;
-            cursor: pointer;
         }
         .red {
             background-color: red;
+            animation: moveRed 4s linear infinite;
         }
         .blue {
             background-color: blue;
+            animation: moveBlue 4s linear infinite;
+        }
+
+        @keyframes moveRed {
+            0% { top: 0; left: 0; }
+            25% { left: 760px; }
+            50% { top: 180px; left: 760px; }
+            75% { left: 0; }
+            100% { top: 0; left: 0; }
+        }
+
+        @keyframes moveBlue {
+            0% { top: 180px; left: 760px; }
+            25% { left: 0; }
+            50% { top: 0; left: 0; }
+            75% { left: 760px; }
+            100% { top: 180px; left: 760px; }
         }
     </style>
 </head>
 <body>
-    <div id="parent" style="position: relative; width: 800px; height: 200px; background-color: yellow; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <div class="movable red" style="top: 0; left: 0;"></div>
-        <div class="movable blue" style="top: 180px; left: 760px;"></div>
+    <div class="container">
+        <div class="movable red"></div>
+        <div class="movable blue"></div>
     </div>
-
-    <script>
-        const redBox = document.querySelector('.red');
-        const blueBox = document.querySelector('.blue');
-        const parentDiv = document.getElementById('parent');
-        let redPosX = 0;
-        let redPosY = 0;
-        let bluePosX = parentDiv.clientWidth - 40; // Starting position for blue box
-        let bluePosY = parentDiv.clientHeight - 20; // Starting position for blue box
-        const moveStep = 10;
-        let redDirection = 1; // 1 for right, -1 for left
-        let blueDirection = -1; // 1 for right, -1 for left
-        let redMovingDown = true; // Track if red is moving down
-        let blueMovingUp = true; // Track if blue is moving up
-
-        function moveBoxes() {
-            // Move red box
-            if (redMovingDown) {
-                redPosX += moveStep * redDirection;
-
-                // Right edge check
-                if (redPosX + 40 > parentDiv.clientWidth) {
-                    redPosX = parentDiv.clientWidth - 40; // Adjust to fit
-                    redPosY += moveStep; // Move down a row
-                    redDirection = -1; // Change direction to left
-                } 
-                // Left edge check
-                else if (redPosX < 0) {
-                    redPosX = 0; // Adjust to fit
-                    redPosY += moveStep; // Move down a row
-                    redDirection = 1; // Change direction to right
-                }
-                
-                // Check if at the bottom right corner
-                if (redPosY + 20 >= parentDiv.clientHeight) {
-                    redPosY = parentDiv.clientHeight - 20; // Adjust to fit
-                    redMovingDown = false; // Change to moving up
-                }
-            } else {
-                redPosX += moveStep * redDirection;
-
-                // Right edge check
-                if (redPosX + 40 > parentDiv.clientWidth) {
-                    redPosX = parentDiv.clientWidth - 40; // Adjust to fit
-                    redPosY -= moveStep; // Move up a row
-                    redDirection = -1; // Change direction to left
-                } 
-                // Left edge check
-                else if (redPosX < 0) {
-                    redPosX = 0; // Adjust to fit
-                    redPosY -= moveStep; // Move up a row
-                    redDirection = 1; // Change direction to right
-                }
-                
-                // Check if at the top
-                if (redPosY <= 0) {
-                    redPosY = 0; // Reset to top
-                    redMovingDown = true; // Change to moving down
-                }
-            }
-
-            // Move blue box
-            if (blueMovingUp) {
-                bluePosX += moveStep * blueDirection;
-
-                // Right edge check
-                if (bluePosX + 40 > parentDiv.clientWidth) {
-                    bluePosX = parentDiv.clientWidth - 40; // Adjust to fit
-                    bluePosY -= moveStep; // Move up a row
-                    blueDirection = -1; // Change direction to left
-                } 
-                // Left edge check
-                else if (bluePosX < 0) {
-                    bluePosX = 0; // Adjust to fit
-                    bluePosY -= moveStep; // Move up a row
-                    blueDirection = 1; // Change direction to right
-                }
-                
-                // Check if at the top left corner
-                if (bluePosY <= 0) {
-                    bluePosY = 0; // Reset to top
-                    blueMovingUp = false; // Change to moving down
-                }
-            } else {
-                bluePosX += moveStep * blueDirection;
-
-                // Right edge check
-                if (bluePosX + 40 > parentDiv.clientWidth) {
-                    bluePosX = parentDiv.clientWidth - 40; // Adjust to fit
-                    bluePosY += moveStep; // Move down a row
-                    blueDirection = -1; // Change direction to left
-                } 
-                // Left edge check
-                else if (bluePosX < 0) {
-                    bluePosX = 0; // Adjust to fit
-                    bluePosY += moveStep; // Move down a row
-                    blueDirection = 1; // Change direction to right
-                }
-                
-                // Check if at the bottom
-                if (bluePosY + 20 >= parentDiv.clientHeight) {
-                    bluePosY = parentDiv.clientHeight - 20; // Adjust to fit
-                    blueMovingUp = true; // Change to moving up
-                }
-            }
-
-            // Update positions
-            redBox.style.left = redPosX + 'px';
-            redBox.style.top = redPosY + 'px';
-            blueBox.style.left = bluePosX + 'px';
-            blueBox.style.top = bluePosY + 'px';
-        }
-
-        setInterval(moveBoxes, 1); // Move every 1 millisecond
-    </script>
 </body>
 </html>
