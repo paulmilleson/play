@@ -23,27 +23,35 @@
         }
         .red {
             background-color: red;
-            animation: moveRed 4s linear infinite;
+            animation: moveRed 8s linear infinite;
         }
         .blue {
             background-color: blue;
-            animation: moveBlue 4s linear infinite;
+            animation: moveBlue 8s linear infinite;
         }
 
         @keyframes moveRed {
             0% { top: 0; left: 0; }
-            25% { top: 0; left: 760px; } /* Move right */
-            50% { top: 180px; left: 760px; } /* Move down */
-            75% { top: 180px; left: 0; } /* Move left */
-            100% { top: 0; left: 0; } /* Move up */
+            12.5% { top: 0; left: 760px; } /* Move right */
+            25% { top: 0; left: 760px; } /* Hold right */
+            37.5% { top: 20px; left: 760px; } /* Move down */
+            50% { top: 20px; left: 0; } /* Move left */
+            62.5% { top: 20px; left: 0; } /* Hold left */
+            75% { top: 40px; left: 0; } /* Move down */
+            87.5% { top: 40px; left: 760px; } /* Move right */
+            100% { top: 0; left: 0; } /* Reset */
         }
 
         @keyframes moveBlue {
             0% { top: 180px; left: 760px; } /* Start bottom right */
-            25% { top: 0; left: 760px; } /* Move up */
-            50% { top: 0; left: 0; } /* Move left */
-            75% { top: 180px; left: 0; } /* Move down */
-            100% { top: 180px; left: 760px; } /* Move to start */
+            12.5% { top: 180px; left: 0; } /* Move left */
+            25% { top: 180px; left: 0; } /* Hold left */
+            37.5% { top: 160px; left: 0; } /* Move up */
+            50% { top: 160px; left: 760px; } /* Move right */
+            62.5% { top: 160px; left: 760px; } /* Hold right */
+            75% { top: 140px; left: 760px; } /* Move up */
+            87.5% { top: 140px; left: 0; } /* Move left */
+            100% { top: 180px; left: 760px; } /* Reset */
         }
     </style>
 </head>
