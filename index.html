@@ -22,10 +22,15 @@
             box-sizing: border-box; /* Include border in the box sizing */
             text-align: center; /* Center text */
             font-size: 14px; /* Text size */
-            font-weight: bold;
             display: flex; /* Use flexbox for vertical centering */
             align-items: center; /* Center vertically */
             justify-content: center; /* Center horizontally */
+            color: yellow; /* Set text color to yellow */
+            text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000; /* Create outline effect */
         }
     </style>
 </head>
@@ -36,7 +41,8 @@
             const colorKeywords = [
                 'red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 
                 'cyan', 'magenta', 'lime', 'teal', 'navy', 'brown', 'gray', 
-                'black', 'white', 'violet', 'indigo', 'gold', 'silver'
+                'black', 'white', 'violet', 'indigo', 'gold', 'silver',
+                'AliceBlue','AntiqueWhite','Aqua','Aquamarine','Azure','Beige','Bisque','Black','BlanchedAlmond','Blue','BlueViolet','Brown','BurlyWood','CadetBlue','Cameo','Chartreuse','Chocolate','Coral','CornflowerBlue','Cornsilk','Crimson','Cyan','DarkBlue','DarkCyan','DarkGoldenRod','DarkGray','DarkGreen','DarkKhaki','DarkMagenta','DarkOliveGreen','DarkOrange','DarkOrchid','DarkRed','DarkSalmon','DarkSeaGreen','DarkSlateBlue','DarkSlateGray','DarkTurquoise','DarkViolet','DeepPink','DeepSkyBlue','DimGray','DodgerBlue','FireBrick','FloralWhite','ForestGreen','Fuchsia','Gainsboro','GhostWhite','Gold','GoldenRod','Gray','Green','GreenYellow','HoneyDew','HotPink','IndianRed','Indigo','Ivory','Khaki','Lavender','LavenderBlush','LawnGreen','LemonChiffon','LightBlue','LightCoral','LightCyan','LightGoldenRodYellow','LightGray','LightGreen','LightPink','LightSalmon','LightSeaGreen','LightSkyBlue','LightSlateGray','LightSteelBlue','LightYellow','Lime','LimeGreen','Linen','Magenta','Maroon','MediumAquaMarine','MediumBlue','MediumOrchid','MediumPurple','MediumSeaGreen','MediumSlateBlue','MediumSpringGreen','MediumTurquoise','MediumVioletRed','MidnightBlue','MintCream','MistyRose','Moccasin','NavajoWhite','Navy','OldLace','Olive','OliveDrab','Orange','OrangeRed','Orchid','PaleGoldenRod','PaleGreen','PaleTurquoise','PaleVioletRed','PapayaWhip','PeachPuff','Peru','Pink','Plum','PowderBlue','Purple','Red','RosyBrown','RoyalBlue','SaddleBrown','Salmon','SandyBrown','SeaGreen','SeaShell','Sienna','Silver','SkyBlue','SlateBlue','SlateGray','Snow','SpringGreen','SteelBlue','Tan','Teal','Thistle','Tomato','Turquoise','Violet','Wheat','White','WhiteSmoke','Yellow','YellowGreen'
             ];
 
             function getRandomColor() {
@@ -53,14 +59,6 @@
                 const color = getRandomColor(); // Get random color keyword
                 div.style.backgroundColor = color; // Assign random background color
                 div.innerText = color; // Set the color name as text inside the box
-                
-                // Change text color to black if background is yellow, silver, or white
-                if (color === 'yellow' || color === 'silver' || color === 'white' || color === 'gold' || color === 'orange' || color === 'pink') {
-                    div.style.color = 'black';
-                } else {
-                    div.style.color = 'yellow';
-                }
-
                 boxes.push({ div, color }); // Store the div and its initial color in an object
                 document.querySelector('.container').appendChild(div);
             }
@@ -78,13 +76,6 @@
                 setTimeout(() => {
                     selectedBox.style.backgroundColor = originalColor;
                     selectedBox.innerText = originalColor; // Revert text to original color name
-                    
-                    // Adjust text color based on background
-                    if (originalColor === 'yellow' || originalColor === 'silver' || originalColor === 'white' || color === 'pink' || color === 'gold' || color === 'orange') {
-                        selectedBox.style.color = 'black';
-                    } else {
-                        selectedBox.style.color = 'yellow';
-                    }
                 }, 2000);
             }
 
