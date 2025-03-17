@@ -53,20 +53,22 @@
                 const color = getRandomColor(); // Get random color keyword
                 div.style.backgroundColor = color; // Assign random background color
                 div.innerText = color; // Set the color name as text inside the box
-                boxes.push(div); // Store the div in an array
+                boxes.push({ div, color }); // Store the div and its initial color in an object
                 document.querySelector('.container').appendChild(div);
             }
 
             function changeRandomBoxColor() {
                 const randomIndex = Math.floor(Math.random() * boxes.length);
-                const selectedBox = boxes[randomIndex];
-                const originalColor = selectedBox.style.backgroundColor; // Capture the original color
+                const selectedBox = boxes[randomIndex].div;
+                const originalColor = boxes[randomIndex].color; // Capture the original color
 
                 selectedBox.style.backgroundColor = 'blue'; // Change to blue
+                selectedBox.innerText = "Sadly Blue"; // Change text to "Sadly Blue"
 
-                // Revert back to the original color after 2 seconds
+                // Revert back to the original color and text after 2 seconds
                 setTimeout(() => {
                     selectedBox.style.backgroundColor = originalColor;
+                    selectedBox.innerText = originalColor; // Revert text to original color name
                 }, 2000);
             }
 
