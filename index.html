@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid of Divs with Random Colors</title>
+    <title>Grid of Divs with Unique Number Words</title>
     <style>
         .container {
-            width: 1024px;
+            width: 1024px; /* Keep container width at 1024px */
             height: 768px;
             border: 1px solid black;
             display: grid;
-            grid-template-columns: repeat(8, 128px);
-            grid-template-rows: repeat(8, 96px);
+            grid-template-columns: repeat(3, 1fr); /* 3 boxes across */
+            grid-template-rows: repeat(4, 192px); /* 4 boxes down */
             gap: 1px; /* Space between the boxes */
         }
 
         .box {
-            width: 128px;
-            height: 96px;
+            width: 100%; /* Full width of the grid cell */
+            height: 192px; /* Height remains 192px */
             border: 1px solid black;
             box-sizing: border-box; /* Include border in the box sizing */
-            font-face: Tahoma;
             text-align: center; /* Center text */
             font-size: 14px; /* Text size */
             display: flex; /* Use flexbox for vertical centering */
@@ -32,58 +31,126 @@
                 1px -1px 0 #000,
                 -1px 1px 0 #000,
                 1px 1px 0 #000; /* Create outline effect */
-            letter-spacing: 2px;
+            letter-spacing: 2px; /* Add letter spacing */
+        }
+
+        a {
+            color: yellow; /* Set hyperlink color to yellow */
+            text-decoration: none; /* Remove underline from links */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Generate inner div boxes with random background colors -->
-        <script>
-            const colorKeywords = [
-                'red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 
-                'cyan', 'magenta', 'lime', 'teal', 'navy', 'brown', 'gray', 
-                'black', 'white', 'violet', 'indigo', 'gold', 'silver',
-                'AliceBlue','AntiqueWhite','Aqua','Aquamarine','Azure','Beige','Bisque','Black','BlanchedAlmond','Blue','BlueViolet','Brown','BurlyWood','CadetBlue','Cameo','Chartreuse','Chocolate','Coral','CornflowerBlue','Cornsilk','Crimson','Cyan','DarkBlue','DarkCyan','DarkGoldenRod','DarkGray','DarkGreen','DarkKhaki','DarkMagenta','DarkOliveGreen','DarkOrange','DarkOrchid','DarkRed','DarkSalmon','DarkSeaGreen','DarkSlateBlue','DarkSlateGray','DarkTurquoise','DarkViolet','DeepPink','DeepSkyBlue','DimGray','DodgerBlue','FireBrick','FloralWhite','ForestGreen','Fuchsia','Gainsboro','GhostWhite','Gold','GoldenRod','Gray','Green','GreenYellow','HoneyDew','HotPink','IndianRed','Indigo','Ivory','Khaki','Lavender','LavenderBlush','LawnGreen','LemonChiffon','LightBlue','LightCoral','LightCyan','LightGray','LightGreen','LightPink','LightSalmon','LightSeaGreen','LightSkyBlue','LightSlateGray','LightSteelBlue','LightYellow','Lime','LimeGreen','Linen','Magenta','Maroon','MediumAquaMarine','MediumBlue','MediumOrchid','MediumPurple','MediumSeaGreen','MediumSlateBlue','MediumSpringGreen','MediumTurquoise','MediumVioletRed','MidnightBlue','MintCream','MistyRose','Moccasin','NavajoWhite','Navy','OldLace','Olive','OliveDrab','Orange','OrangeRed','Orchid','PaleGoldenRod','PaleGreen','PaleTurquoise','PaleVioletRed','PapayaWhip','PeachPuff','Peru','Pink','Plum','PowderBlue','Purple','Red','RosyBrown','RoyalBlue','SaddleBrown','Salmon','SandyBrown','SeaGreen','SeaShell','Sienna','Silver','SkyBlue','SlateBlue','SlateGray','Snow','SpringGreen','SteelBlue','Tan','Teal','Thistle','Tomato','Turquoise','Violet','Wheat','White','WhiteSmoke','Yellow','YellowGreen'
-            ];
-
-            function getRandomColor() {
-                const randomIndex = Math.floor(Math.random() * colorKeywords.length);
-                const color = colorKeywords[randomIndex]; // Pick a random color keyword
-                return color;
-            }
-
-            const boxes = [];
-            for (let i = 1; i <= 64; i++) {
-                let div = document.createElement('div');
-                div.id = `div${i}`;
-                div.className = 'box';
-                const color = getRandomColor(); // Get random color keyword
-                div.style.backgroundColor = color; // Assign random background color
-                div.innerText = color; // Set the color name as text inside the box
-                boxes.push({ div, color }); // Store the div and its initial color in an object
-                document.querySelector('.container').appendChild(div);
-            }
-
-            function changeRandomBoxColor() {
-                const randomIndex = Math.floor(Math.random() * boxes.length);
-                const selectedBox = boxes[randomIndex].div;
-                const originalColor = boxes[randomIndex].color; // Capture the original color
-
-                selectedBox.style.backgroundColor = 'blue'; // Change to blue
-                selectedBox.innerText = "Sadly Blue"; // Change text to "Sadly Blue"
-                selectedBox.style.color = 'yellow'; // Reset text color to yellow when blue
-
-                // Revert back to the original color and text after 2 seconds
-                setTimeout(() => {
-                    selectedBox.style.backgroundColor = originalColor;
-                    selectedBox.innerText = originalColor; // Revert text to original color name
-                }, 2000);
-            }
-
-            // Change color randomly 2 times per second
-            setInterval(changeRandomBoxColor, 500);
-        </script>
+        <div class="box" style="background-color: AliceBlue;"></div>
+        <div class="box" style="background-color: Aquamarine;"></div>
+        <div class="box" style="background-color: Coral;"></div>
+        <div class="box" style="background-color: Cyan;"></div>
+        <div class="box" style="background-color: DarkOrange;"></div>
+        <div class="box" style="background-color: DeepPink;"></div>
+        <div class="box" style="background-color: Gold;"></div>
+        <div class="box" style="background-color: LightCoral;"></div>
+        <div class="box" style="background-color: MediumSeaGreen;"></div>
+        <div class="box" style="background-color: LightSkyBlue;"></div>
+        <div class="box" style="background-color: PaleGoldenRod;"></div>
+        <div class="box" style="background-color: Tomato;"></div>
     </div>
+
+    <script>
+        const colorKeywords = [
+            'Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange', 'Pink', 
+            'Cyan', 'Magenta', 'Lime', 'Teal', 'Navy', 'Brown', 'Gray', 
+            'Black', 'White', 'Violet', 'Indigo', 'Gold', 'Silver',
+            'AliceBlue', 'AntiqueWhite', 'Aqua', 'Aquamarine', 'Azure', 'Beige', 'Bisque', 'Black', 'BlanchedAlmond', 'Blue', 'BlueViolet',
+            'Brown', 'BurlyWood', 'CadetBlue', 'Cameo', 'Chartreuse', 'Chocolate', 'Coral', 'CornflowerBlue', 'Cornsilk', 'Crimson', 'Cyan',
+            'DarkBlue', 'DarkCyan', 'DarkGoldenRod', 'DarkGray', 'DarkGreen', 'DarkKhaki', 'DarkMagenta', 'DarkOliveGreen', 'DarkOrange',
+            'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkTurquoise', 'DarkViolet', 'DeepPink',
+            'DeepSkyBlue', 'DimGray', 'DodgerBlue', 'FireBrick', 'FloralWhite', 'ForestGreen', 'Fuchsia', 'Gainsboro', 'GhostWhite', 'Gold',
+            'GoldenRod', 'Gray', 'Green', 'GreenYellow', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush',
+            'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGray', 'LightGreen', 'LightPink', 'LightSalmon',
+            'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta',
+            'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen',
+            'MediumTurquoise', 'MediumVioletRed', 'MidnightBlue', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive',
+            'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleGoldenRod', 'PaleGreen', 'PaleTurquoise', 'PaleVioletRed', 'PapayaWhip',
+            'PeachPuff', 'Peru', 'Pink', 'Plum', 'PowderBlue', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown',
+            'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal',
+            'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'Yellow', 'YellowGreen'
+        ];
+
+        // Create a unique combined 2D array of links and numberWords
+        const combinedArray = [
+            ['Technical Writing', 'One'],
+            ['Technical Training', 'Two'],
+            ['Ad Copy', 'Three'],
+            ['Social Marketing', 'Four'],
+            ['Bookkeeping', 'Five'],
+            ['VBA For Excel', 'Six'],
+            ['VBA For MS Word', 'Seven'],
+            ['Excel Macros', 'Eight'],
+            ['Coldfusion App Dev', 'Nine'],
+            ['Google App Script', 'Ten'],
+            ['Graphic Design', 'Eleven'],
+            ['JavaScript Apps', 'Twelve']
+        ];
+
+        const boxes = document.querySelectorAll('.box');
+
+        // Function to shuffle the combined array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Set initial text for each box using the combined array
+        function setInitialText() {
+            const shuffledArray = shuffleArray([...combinedArray]);
+            boxes.forEach((box, index) => {
+                const link = `<a href="${shuffledArray[index][1]}.html" target="_blank">${shuffledArray[index][0]}</a>`;
+                box.innerHTML = link; // Set initial inner text
+            });
+        }
+
+        function changeBoxColor(box) {
+            const randomColor = colorKeywords[Math.floor(Math.random() * colorKeywords.length)];
+            box.style.backgroundColor = randomColor; // Change to a random color
+        }
+
+        // Function to change all box values at random intervals
+        function refreshAllBoxes() {
+            const shuffledArray = shuffleArray([...combinedArray]);
+            boxes.forEach((box, index) => {
+                const link = `<a href="${shuffledArray[index][1]}.html" target="_blank">${shuffledArray[index][0]}</a>`;
+                box.innerHTML = link; // Update box content to hyperlink
+            });
+        }
+
+        // Set initial text when the page loads
+        setInitialText();
+
+        // Change box values at random intervals
+        setInterval(() => {
+            refreshAllBoxes();
+        }, 3000); // Change text every 3 seconds
+
+        // Function to change colors at random intervals
+        function startRandomColorChange() {
+            boxes.forEach(box => {
+                const randomInterval = Math.floor(Math.random() * 3000) + 1000; // Random interval between 1 and 4 seconds
+                setInterval(() => {
+                    changeBoxColor(box);
+                }, randomInterval);
+            });
+        }
+
+        startRandomColorChange(); // Start random color changes
+
+    </script>
 </body>
 </html>
