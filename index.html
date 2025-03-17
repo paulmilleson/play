@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Londrina Outline|Open+Sans:400,700" rel="stylesheet">
     <title>Grid of Divs with Random Colors</title>
     <style>
         .container {
@@ -22,13 +21,8 @@
             border: 1px solid black;
             box-sizing: border-box; /* Include border in the box sizing */
             text-align: center; /* Center text */
-            font-family: 'Tahoma'; /* Fallback font */
+            font-size: 14px; /* Text size */
             font-weight: bold;
-            font-effect-outline: text-shadow: 2px 2px 2px black;
-            webkit-text-stroke-width: 2px;
-            webkit-text-stroke-color: black;
-            color: yellow; /* Text color */
-            font-size: 16px; /* Text size */
             display: flex; /* Use flexbox for vertical centering */
             align-items: center; /* Center vertically */
             justify-content: center; /* Center horizontally */
@@ -59,6 +53,14 @@
                 const color = getRandomColor(); // Get random color keyword
                 div.style.backgroundColor = color; // Assign random background color
                 div.innerText = color; // Set the color name as text inside the box
+                
+                // Change text color to black if background is yellow, silver, or white
+                if (color === 'yellow' || color === 'silver' || color === 'white') {
+                    div.style.color = 'black';
+                } else {
+                    div.style.color = 'yellow';
+                }
+
                 boxes.push({ div, color }); // Store the div and its initial color in an object
                 document.querySelector('.container').appendChild(div);
             }
@@ -70,11 +72,19 @@
 
                 selectedBox.style.backgroundColor = 'blue'; // Change to blue
                 selectedBox.innerText = "Sadly Blue"; // Change text to "Sadly Blue"
+                selectedBox.style.color = 'yellow'; // Reset text color to yellow when blue
 
                 // Revert back to the original color and text after 2 seconds
                 setTimeout(() => {
                     selectedBox.style.backgroundColor = originalColor;
                     selectedBox.innerText = originalColor; // Revert text to original color name
+                    
+                    // Adjust text color based on background
+                    if (originalColor === 'yellow' || originalColor === 'silver' || originalColor === 'white') {
+                        selectedBox.style.color = 'black';
+                    } else {
+                        selectedBox.style.color = 'yellow';
+                    }
                 }, 2000);
             }
 
