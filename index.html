@@ -1,157 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid of Divs with Unique Number Words</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
-        }
+// Sample combinedArray for demonstration
+const combinedArray = [
+    ['Red', 'red'],
+    ['Green', 'green'],
+    ['Blue', 'blue'],
+    // Add more colors as needed
+];
 
-        .container {
-            width: 1024px; /* Keep container width at 1024px */
-            height: 768px;
-            border: 1px solid black;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 boxes across */
-            grid-template-rows: repeat(4, 192px); /* 4 boxes down */
-            gap: 1px; /* Space between the boxes */
-        }
+// Function to shuffle the array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
-        .box {
-            width: 100%; /* Full width of the grid cell */
-            height: 192px; /* Height remains 192px */
-            border: 1px solid black;
-            box-sizing: border-box; /* Include border in the box sizing */
-            text-align: center; /* Center text */
-            font-size: 20px; /* Increased text size for better readability */
-            font-weight: 700; /* Set font to bold */
-            display: flex; /* Use flexbox for vertical centering */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-            color: yellow; /* Set text color to yellow */
-            -webkit-text-stroke: 1px black; /* Outline effect using text-stroke */
-            letter-spacing: 2px; /* Add letter spacing */
-        }
+// Assuming 'boxes' is a NodeList of elements
+const boxes = document.querySelectorAll('.box'); // Adjust the selector as needed
 
-        a {
-            color: yellow; /* Set hyperlink color to yellow */
-            text-decoration: none; /* Remove underline from links */
-        }
+// Function to set initial text
+function setInitialText() {
+    const shuffledArray = shuffleArray([...combinedArray]);
+    boxes.forEach((box, index) => {
+        box.innerHTML = box.style.backgroundColor; // Set initial inner text to the background color
+    });
+}
 
-        a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="box" style="background-color: AliceBlue;"></div>
-        <div class="box" style="background-color: Aquamarine;"></div>
-        <div class="box" style="background-color: Coral;"></div>
-        <div class="box" style="background-color: Cyan;"></div>
-        <div class="box" style="background-color: DarkOrange;"></div>
-        <div class="box" style="background-color: DeepPink;"></div>
-        <div class="box" style="background-color: Gold;"></div>
-        <div class="box" style="background-color: LightCoral;"></div>
-        <div class="box" style="background-color: MediumSeaGreen;"></div>
-        <div class="box" style="background-color: LightSkyBlue;"></div>
-        <div class="box" style="background-color: PaleGoldenRod;"></div>
-        <div class="box" style="background-color: Tomato;"></div>
-    </div>
+// Function to refresh all boxes
+function refreshAllBoxes() {
+    const shuffledArray = shuffleArray([...combinedArray]);
+    boxes.forEach((box, index) => {
+        box.innerHTML = box.style.backgroundColor; // Update box content to background color
+    });
+}
 
-    <script>
-        const colorKeywords = [
-            'Red', 'Blue', 'Green', 'Purple', 'Orange', 'Pink', 
-            'Cyan', 'Magenta', 'Lime', 'Teal', 'Navy', 'Brown', 'Gray', 
-            'Black', 'Violet', 'Indigo', 'Gold', 'Silver',
-            'AliceBlue', 'Aqua', 'Aquamarine', 'Azure', 'Black', 'Blue', 'BlueViolet',
-            'Brown', 'BurlyWood', 'CadetBlue', 'Chocolate', 'Coral', 'CornflowerBlue', 'Crimson', 'Cyan',
-            'DarkBlue', 'DarkCyan', 'DarkGoldenRod', 'DarkGray', 'DarkGreen', 'DarkKhaki', 'DarkMagenta', 'DarkOliveGreen', 'DarkOrange',
-            'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkTurquoise', 'DarkViolet', 'DeepPink',
-            'DeepSkyBlue', 'DimGray', 'DodgerBlue', 'FireBrick', 'ForestGreen', 'Fuchsia', 'Gainsboro', 'Gold',
-            'GoldenRod', 'Gray', 'Green', 'GreenYellow', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush',
-            'LawnGreen', 'LemonChiffon', 'Lime', 'LimeGreen', 'Magenta',
-            'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen',
-            'MediumTurquoise', 'MediumVioletRed', 'MidnightBlue', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'Olive',
-            'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleGreen', 'PaleTurquoise', 'PaleVioletRed', 'PapayaWhip',
-            'PeachPuff', 'Peru', 'Pink', 'Plum', 'PowderBlue', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown',
-            'SeaGreen', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal',
-            'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'YellowGreen'
-        ];
-
-        // Create a unique combined 2D array of links and numberWords
-        const combinedArray = [
-            ['Technical Writing', 'One'],
-            ['Technical Training', 'Two'],
-            ['Ad Copy', 'Three'],
-            ['Social Marketing', 'Four'],
-            ['Bookkeeping', 'Five'],
-            ['VBA For Excel', 'Six'],
-            ['VBA For MS Word', 'Seven'],
-            ['Excel Macros', 'Eight'],
-            ['Coldfusion App Dev', 'Nine'],
-            ['Google App Script', 'Ten'],
-            ['Graphic Design', 'Eleven'],
-            ['JavaScript Apps', 'Twelve']
-        ];
-
-        const boxes = document.querySelectorAll('.box');
-
-        // Function to shuffle the combined array
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        // Set initial text for each box using the combined array
-        function setInitialText() {
-            const shuffledArray = shuffleArray([...combinedArray]);
-            boxes.forEach((box, index) => {
-                const link = `<a href="${shuffledArray[index][1]}.html" target="_blank">${shuffledArray[index][0]}</a>`;
-                box.innerHTML = link; // Set initial inner text
-            });
-        }
-
-        function changeBoxColor(box) {
-            const randomColor = colorKeywords[Math.floor(Math.random() * colorKeywords.length)];
-            box.style.backgroundColor = randomColor; // Change to a random color
-        }
-
-        // Function to change all box values at random intervals
-        function refreshAllBoxes() {
-            const shuffledArray = shuffleArray([...combinedArray]);
-            boxes.forEach((box, index) => {
-                const link = `<a href="${shuffledArray[index][1]}.html" target="_blank">${shuffledArray[index][0]}</a>`;
-                box.innerHTML = link; // Update box content to hyperlink
-            });
-        }
-
-        // Set initial text when the page loads
-        setInitialText();
-
-        // Change box values at random intervals
-        setInterval(() => {
-            refreshAllBoxes();
-        }, 3000); // Change text every 3 seconds
-
-        // Function to change colors at random intervals
-        function startRandomColorChange() {
-            boxes.forEach(box => {
-                const randomInterval = Math.floor(Math.random() * 3000) + 1000; // Random interval between 1 and 4 seconds
-                setInterval(() => {
-                    changeBoxColor(box);
-                }, randomInterval);
-            });
-        }
-
-        startRandomColorChange(); // Start random color changes
-
-    </script>
-</body>
-</html>
+// Example usage
+document.addEventListener('DOMContentLoaded', () => {
+    setInitialText(); // Initial setup
+    // You can call refreshAllBoxes() as needed
+});
